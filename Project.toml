@@ -1,0 +1,7 @@
+name = "WarhammerCards"
+uuid = "6ebc8039-b089-45f6-871c-566acb076951"
+authors = ["Iñaki Ulibarri Utrilla <i.ulibarri.utrilla@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Luxor = "ae8d54c2-7ccd-5906-9d76-62fc9837b5bc"
