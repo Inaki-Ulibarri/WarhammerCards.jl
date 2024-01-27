@@ -1,3 +1,5 @@
+# TODO: add reading card info from json files
+
 module WarhammerCards
 
 export Card, makeCard, greet
@@ -11,7 +13,6 @@ struct Card
     scolor :: String
     bimage :: String # path to background image
 end
-
 
 function makeCard(card :: Card, r)
     w, h = 600, 800
@@ -28,15 +29,17 @@ function makeCard(card :: Card, r)
     img = readpng(card.bimage) 
     placeimage(img, O, 0.2, centered = true)
     # title
-    tbw, tbh = bgw, 180
-    setcolor(0, 0, 0, 0) # don't write into the canvas, just get dimesions
-    bbox = BoundingBox(box(Point(0, -bgh/2 + tbh/2), tbw, tbh))
-    (fs, l, fp) = textfit(card.title, bbox)
     setcolor("grey7")
-    fontsize(fs) # actually write into the canvas
-    text(card.title, Point(0, -h/2+50+100), halign = :center, valign = :center) 
+    fontface("URWBookman")
+    tbw, tbh = bgw, 180
+    tbox = BoundingBox(box(Point(0, (-bgh + tbh)/2), tbw, tbh))
+    textfit(card.title, tbox)
     setline(6)
     line(Point(-w/2+50, -h/2+50+tbh), Point(w/2-50, -h/2+50+tbh), action = :stroke)
+    # body of the card
+    bbw, bbh = bgw, bgh - tbh
+    bbox = BoundingBox(box(Point(0, (bgh - bbh)/2), bbw, bbh))
+    textfit(card.body, bbox, 52; horizontalmargin = 12)
     finish()
 end
 
