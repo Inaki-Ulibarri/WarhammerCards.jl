@@ -1,0 +1,18 @@
+[
+    {
+        "title" : "Rune of Wrath & Ruin",
+        "body" : "This missile has a casting value of 9+ and a range of 27\". The target unit suffer 2d6 hits of strength 4 with an ap of -2. ",
+        "pcolor" : "burlywood2",
+        "scolor" : "dodgerblue4",
+        "bimage" : "Dwarfhead-0.png"
+    },
+    {
+        "title" : "Rune of Oath & Steel",
+        "body" : "This enchantment has a casting value of 7+/11+ and a range of 24\". The target unit can reroll any failed armour saves, if it is enhanced, add 1 to the armour value in addition.",
+        "pcolor" : "burlywood2",
+        "scolor" : "dodgerblue4",
+        "bimage" : "Dwarfhead-0.png"
+    }
+
+    
+]

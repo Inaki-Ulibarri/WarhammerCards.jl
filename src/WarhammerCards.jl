@@ -1,9 +1,11 @@
-# TODO: add reading card info from json files
+# TODO: optimise makeCards()
+# TODO: add more cards for printing
+# TODO: be able to make cards for a single faction/
 
 module WarhammerCards
 
-export Card, makeCard, greet
-import Luxor
+export Card, makeCard, makeCards, greet
+import Luxor, JSON3
 using Luxor
 
 struct Card
@@ -26,14 +28,15 @@ function makeCard(card :: Card, r)
     setcolor(card.pcolor)
     squircle(O, bgw/2, bgh/2, action = :fill, rt = r)
     squircle(O, bgw/2, bgh/2, action = :clip, rt = r)
-    img = readpng(card.bimage) 
+    imgpath = pkgdir(WarhammerCards, "data", "images", card.bimage)
+    img = readpng(imgpath) 
     placeimage(img, O, 0.2, centered = true)
     # title
     setcolor("grey7")
-    fontface("URWBookman")
+    fontface("Vollkorn")
     tbw, tbh = bgw, 180
     tbox = BoundingBox(box(Point(0, (-bgh + tbh)/2), tbw, tbh))
-    textfit(card.title, tbox)
+    textfit(card.title, tbox; horizontalmargin = 12)
     setline(6)
     line(Point(-w/2+50, -h/2+50+tbh), Point(w/2-50, -h/2+50+tbh), action = :stroke)
     # body of the card
@@ -41,6 +44,19 @@ function makeCard(card :: Card, r)
     bbox = BoundingBox(box(Point(0, (bgh - bbh)/2), bbw, bbh))
     textfit(card.body, bbox, 52; horizontalmargin = 12)
     finish()
+end
+
+function cardOfDict(d)
+    Card(d[:title], d[:body], d[:pcolor], d[:scolor], d[:bimage])
+end
+
+function makeCards(fname :: String)
+    cards = read(fname, String)
+    cards = JSON3.read(cards)
+    for c ∈ cards
+        card = cardOfDict(c)
+        makeCard(card, 0.05)
+    end
 end
 
 greet() = print("Hello World!")
