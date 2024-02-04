@@ -1,0 +1,9 @@
+[
+    {
+        "title" : "Daemon of Khorne",
+        "body" : "Daemons of Khorne have the Hatred (Daemons of Slaanesh) special rule. In addition, during a turn in which it made a charge move, a Daemon of Khorne (but not its mount) gains a +1 modifier to its Strength characteristic.",
+        "pcolor" : "grey57",
+        "scolor" : "maroon",
+        "bimage" : "Daemon_of_Chaos_Banner.png"
+    }    
+]
